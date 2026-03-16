@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ExternalLink,
@@ -7,6 +8,8 @@ import {
   Layers,
   Sparkles,
   Mail,
+  Linkedin,
+  Globe,
 } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 
@@ -89,6 +92,15 @@ export default function AboutPage() {
 
         {/* Professional intro card */}
         <div className="rounded-xl border border-source-border bg-white p-8">
+          <div className="mb-6">
+            <Image
+              src="/source-logo.png"
+              alt="The Source Logo"
+              width={160}
+              height={40}
+              className="h-10 w-auto"
+            />
+          </div>
           <h3 className="text-2xl font-bold text-source-black">Ahmed Khan</h3>
           <p className="mt-1 text-sm font-medium text-source-green">
             Senior AI Engineer
@@ -99,6 +111,28 @@ export default function AboutPage() {
             procurement workflows at The Source — from document intelligence to
             multi-agent orchestration.
           </p>
+          <div className="mt-4 flex items-center gap-4">
+            <a
+              href="https://www.linkedin.com/in/ahmedkhan25"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-source-ai hover:underline"
+            >
+              <Linkedin size={14} />
+              LinkedIn
+              <ExternalLink size={12} />
+            </a>
+            <a
+              href="https://www.ahmedkhan-ai.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-source-ai hover:underline"
+            >
+              <Globe size={14} />
+              ahmedkhan-ai.com
+              <ExternalLink size={12} />
+            </a>
+          </div>
         </div>
       </motion.div>
 
@@ -118,35 +152,8 @@ export default function AboutPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 gap-4 md:grid-cols-2"
+          className="grid grid-cols-1 gap-4"
         >
-          {/* Deposly */}
-          <motion.div
-            variants={cardVariants}
-            className="rounded-xl border border-source-border bg-white p-6"
-          >
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-source-ai/10 text-source-ai">
-              <Database size={20} />
-            </div>
-            <h4 className="text-sm font-bold text-source-black">Deposly</h4>
-            <p className="mt-1 text-xs font-medium text-source-green">
-              AI-Powered Deposition Preparation
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-source-muted">
-              Built a full-stack AI platform for legal deposition prep with RAG,
-              CopilotKit integration, and document intelligence.
-            </p>
-            <a
-              href="https://deposly.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-source-ai hover:underline"
-            >
-              deposly.vercel.app
-              <ExternalLink size={12} />
-            </a>
-          </motion.div>
-
           {/* This Demo */}
           <motion.div
             variants={cardVariants}
@@ -234,10 +241,10 @@ export default function AboutPage() {
           <span>
             Get in touch:{" "}
             <a
-              href="mailto:ahmed@example.com"
+              href="mailto:ahmedkhan25@gmail.com"
               className="text-source-ai hover:underline"
             >
-              ahmed@example.com
+              ahmedkhan25@gmail.com
             </a>
           </span>
         </div>
