@@ -20,7 +20,6 @@ import {
 const navItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/landscape", label: "AI Landscape", icon: Globe },
-  { href: "/problems", label: "AI Problems", icon: AlertTriangle },
   { href: "/strategy", label: "Agent Strategy", icon: Target },
   { href: "/demos", label: "Interactive Demos", icon: Play },
   { href: "/bid-review", label: "Bid Review", icon: FileSearch },
@@ -28,6 +27,10 @@ const navItems = [
   { href: "/evals", label: "Evals", icon: FlaskConical },
   { href: "/ai-coding", label: "AI Coding", icon: Terminal },
   { href: "/about", label: "About", icon: User },
+];
+
+const bottomLinks = [
+  { href: "/problems", label: "AI Problem Patterns", icon: AlertTriangle },
 ];
 
 export default function Sidebar() {
@@ -72,6 +75,31 @@ export default function Sidebar() {
           );
         })}
       </nav>
+
+      {/* Bottom links */}
+      <div className="border-t border-white/10 px-3 pt-3 pb-2">
+        <p className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-wider text-white/30">
+          Research
+        </p>
+        {bottomLinks.map(({ href, label, icon: Icon }) => {
+          const isActive = pathname.startsWith(href);
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={clsx(
+                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
+                isActive
+                  ? "bg-white/10 text-white"
+                  : "text-white/60 hover:bg-white/5 hover:text-white"
+              )}
+            >
+              <Icon size={18} />
+              {label}
+            </Link>
+          );
+        })}
+      </div>
 
       {/* Footer */}
       <div className="px-5 py-4 text-xs text-white/40">

@@ -45,9 +45,8 @@ function ProblemSection({
       whileInView="visible"
       viewport={{ once: true, margin: "-60px" }}
       variants={sectionVariants}
-      className="border-t border-source-border pt-10"
     >
-      <p className="text-xs font-semibold tracking-widest uppercase text-source-muted mb-1">
+      <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-source-muted mb-2">
         Problem {number}
       </p>
       <h2 className="text-2xl font-bold text-source-black mb-2">{title}</h2>
@@ -56,7 +55,7 @@ function ProblemSection({
       </p>
 
       {/* Diagram */}
-      <div className="rounded-xl border border-source-border bg-[#1A1A1A] p-6 overflow-x-auto">
+      <div className="rounded-xl bg-[#1E1E1E] p-8 overflow-x-auto">
         {children}
       </div>
 
@@ -81,201 +80,231 @@ function ProblemSection({
 }
 
 // =============================================================================
-// Diagram 1 — System Awareness Pyramid
+// Diagram 1 — Lost in System Awareness (Pyramid)
 // =============================================================================
 
 function SystemAwarenessDiagram() {
-  const layers = [
-    { y: 84, w: 200, x: 240, label: "AI assistants · agents · tools" },
-    { y: 134, w: 320, x: 180, label: "emails · code · docs · plans · summaries" },
-    { y: 184, w: 520, x: 80, label: "pipelines · integrations · scheduled agents · background tasks" },
-  ];
-
   return (
-    <svg
-      width="100%"
-      viewBox="0 0 680 250"
-      className="overflow-visible"
-      aria-label="System awareness pyramid diagram"
-    >
-      <defs>
-        <marker
-          id="arr-sa"
-          viewBox="0 0 10 10"
-          refX="8"
-          refY="5"
-          markerWidth="6"
-          markerHeight="6"
-          orient="auto-start-reverse"
-        >
-          <path
-            d="M2 1L8 5L2 9"
-            fill="none"
-            stroke="rgba(255,255,255,0.4)"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </marker>
-      </defs>
-
+    <div className="flex flex-col items-center gap-0">
       {/* NASA callout */}
-      <rect x="20" y="10" width="200" height="60" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5" />
-      <text x="30" y="30" fontSize="11" fill="rgba(255,255,255,0.6)">Astronauts at ISS faced this</text>
-      <text x="30" y="45" fontSize="11" fill="rgba(255,255,255,0.6)">from mission control below.</text>
-      <text x="30" y="60" fontSize="11" fill="rgba(255,255,255,0.3)" fontStyle="italic">Now you face it from AI above.</text>
+      <div className="self-start mb-6 rounded-lg border border-white/30 bg-white/10 px-4 py-3 max-w-xs">
+        <p className="text-xs text-white/90 leading-relaxed">
+          Astronauts at ISS faced this from mission control below.
+        </p>
+        <p className="text-xs text-white/70 italic mt-1">
+          Now you face it from AI above.
+        </p>
+      </div>
 
       {/* You — apex */}
-      <rect x="290" y="16" width="100" height="42" rx="8" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.7)" strokeWidth="1.5" />
-      <text x="340" y="33" textAnchor="middle" fontSize="14" fontWeight="600" fill="rgb(251,191,36)">You</text>
-      <text x="340" y="49" textAnchor="middle" fontSize="10" fill="rgba(251,191,36,0.7)">decision maker</text>
+      <div className="rounded-lg border-2 border-amber-500/70 bg-amber-500/15 px-8 py-3 text-center mb-4">
+        <p className="text-sm font-semibold text-amber-400">You</p>
+        <p className="text-[11px] text-amber-400/70">decision maker</p>
+      </div>
 
-      {/* Connecting lines */}
-      <line x1="340" y1="58" x2="340" y2="80" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" markerEnd="url(#arr-sa)" />
-      <line x1="340" y1="114" x2="340" y2="130" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" markerEnd="url(#arr-sa)" />
-      <line x1="340" y1="164" x2="340" y2="180" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" markerEnd="url(#arr-sa)" />
+      {/* Arrow */}
+      <div className="h-6 w-px bg-white/20 mb-2" />
 
-      {/* Layers */}
-      {layers.map((layer) => (
-        <g key={layer.y}>
-          <rect x={layer.x} y={layer.y} width={layer.w} height="30" rx="5" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)" strokeWidth="0.5" />
-          <text x="340" y={layer.y + 15} textAnchor="middle" dominantBaseline="central" fontSize="11" fill="rgba(255,255,255,0.6)">
-            {layer.label}
-          </text>
-        </g>
-      ))}
+      {/* Layer 1 */}
+      <div className="w-full max-w-sm rounded-md border border-white/30 bg-white/10 px-6 py-3 text-center mb-3">
+        <p className="text-xs text-white/90">AI assistants · agents · tools</p>
+      </div>
+
+      {/* Arrow */}
+      <div className="h-4 w-px bg-white/15 mb-2" />
+
+      {/* Layer 2 */}
+      <div className="w-full max-w-md rounded-md border border-white/30 bg-white/10 px-6 py-3 text-center mb-3">
+        <p className="text-xs text-white/90">emails · code · docs · plans · summaries</p>
+      </div>
+
+      {/* Arrow */}
+      <div className="h-4 w-px bg-white/15 mb-2" />
+
+      {/* Layer 3 */}
+      <div className="w-full max-w-lg rounded-md border border-white/30 bg-white/10 px-6 py-3 text-center mb-4">
+        <p className="text-xs text-white/90">
+          pipelines · integrations · scheduled agents · background tasks · APIs
+        </p>
+      </div>
 
       {/* Caption */}
-      <text x="340" y="235" textAnchor="middle" fontSize="11" fill="rgba(255,255,255,0.3)">
+      <p className="text-[11px] text-white/70 text-center">
         the pyramid grows automatically — you didn&apos;t ask for most of it
-      </text>
-    </svg>
+      </p>
+    </div>
   );
 }
 
 // =============================================================================
-// Diagram 2 — Semantic Drift
+// Diagram 2 — Semantic Drift (Diverging Paths)
 // =============================================================================
 
 function SemanticDriftDiagram() {
-  const stages = [
-    { x: 20, label: "Your Intent", sub: '"Cut vendor costs\nby 15% this quarter"', color: "rgb(45,139,94)", bgColor: "rgba(45,139,94,0.15)", borderColor: "rgba(45,139,94,0.7)" },
-    { x: 170, label: "AI Interprets", sub: '"Reduce unit prices\nacross all categories"', color: "rgb(79,110,247)", bgColor: "rgba(79,110,247,0.15)", borderColor: "rgba(79,110,247,0.7)" },
-    { x: 320, label: "Agent Executes", sub: '"Switch to cheapest\nvendor per line item"', color: "rgb(245,158,11)", bgColor: "rgba(245,158,11,0.15)", borderColor: "rgba(245,158,11,0.7)" },
-    { x: 470, label: "Outcome", sub: '"Lowest-quality vendor\nselected for lobby chairs"', color: "rgb(199,75,42)", bgColor: "rgba(199,75,42,0.15)", borderColor: "rgba(199,75,42,0.7)" },
+  const interpretations = [
+    { action: "Automate deploys", outcome: "CI/CD overhaul · 6 months", color: "text-amber-400", bg: "bg-amber-500/15 border-amber-500/50" },
+    { action: "Cut review cycles", outcome: "Full org restructure", color: "text-amber-400", bg: "bg-amber-500/15 border-amber-500/50" },
+    { action: "Reduce headcount", outcome: "Hiring freeze", color: "text-amber-400", bg: "bg-amber-500/15 border-amber-500/50" },
   ];
 
   return (
-    <svg
-      width="100%"
-      viewBox="0 0 660 160"
-      className="overflow-visible"
-      aria-label="Semantic drift diagram"
-    >
-      <defs>
-        <marker id="arr-sd" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M2 1L8 5L2 9" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </marker>
-      </defs>
+    <div>
+      {/* Column headers */}
+      <div className="grid grid-cols-[140px_1fr_1fr] gap-4 mb-4 items-end">
+        <div />
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-white/70 text-center">
+          3 people + AI infer it
+        </p>
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-white/70 text-center">
+          3 divergent outcomes
+        </p>
+      </div>
 
-      {stages.map((stage, i) => (
-        <g key={stage.label}>
-          {/* Connector */}
-          {i > 0 && (
-            <line
-              x1={stage.x - 20}
-              y1="55"
-              x2={stage.x}
-              y2="55"
-              className="dash-animated"
-              stroke="rgba(255,255,255,0.2)"
-              strokeWidth="1"
-              markerEnd="url(#arr-sd)"
-            />
-          )}
-          {/* Card */}
-          <rect x={stage.x} y="20" width="140" height="70" rx="8" fill={stage.bgColor} stroke={stage.borderColor} strokeWidth="1.2" />
-          <text x={stage.x + 70} y="40" textAnchor="middle" fontSize="11" fontWeight="600" fill={stage.color}>
-            {stage.label}
-          </text>
-          {stage.sub.split("\n").map((line, j) => (
-            <text key={j} x={stage.x + 70} y={55 + j * 14} textAnchor="middle" fontSize="10" fill="rgba(255,255,255,0.5)">
-              {line}
-            </text>
-          ))}
-        </g>
-      ))}
+      {/* Goal node + rows */}
+      <div className="grid grid-cols-[140px_1fr_1fr] gap-4 items-center">
+        {/* Goal — spans 3 rows */}
+        <div className="row-span-3 flex items-center">
+          <div className="rounded-lg border-2 border-amber-500/70 bg-amber-500/15 px-5 py-4 text-center w-full">
+            <p className="text-sm font-semibold text-amber-400">Goal:</p>
+            <p className="text-xs text-amber-400/80">&quot;ship faster&quot;</p>
+          </div>
+        </div>
 
-      {/* Drift indicator */}
-      <line x1="90" y1="110" x2="540" y2="110" stroke="rgba(199,75,42,0.3)" strokeWidth="1" strokeDasharray="4 3" />
-      <text x="20" y="115" fontSize="10" fill="rgba(199,75,42,0.6)">original intent</text>
-      <line x1="90" y1="130" x2="540" y2="130" stroke="rgba(199,75,42,0.5)" strokeWidth="2" />
-      <text x="20" y="135" fontSize="10" fill="rgba(199,75,42,0.8)">actual execution</text>
-      <text x="330" y="152" textAnchor="middle" fontSize="10" fill="rgba(255,255,255,0.3)">
-        meaning shifts at every handoff — small drift compounds into wrong outcomes
-      </text>
-    </svg>
+        {/* Row 1 */}
+        <div className="flex items-center gap-2">
+          <div className="h-px flex-1 border-t border-dashed border-source-border" />
+          <div className="rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-1.5">
+            <p className="text-xs text-amber-400">{interpretations[0].action}</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="h-px w-6 border-t border-dashed border-source-border dash-animated" />
+          <div className="rounded-md border border-white/30 bg-white/10 px-3 py-1.5 flex-1 text-center">
+            <p className="text-xs text-white/90">{interpretations[0].outcome}</p>
+          </div>
+        </div>
+
+        {/* Row 2 */}
+        <div className="flex items-center gap-2">
+          <div className="h-px flex-1 border-t border-dashed border-source-border" />
+          <div className="rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-1.5">
+            <p className="text-xs text-amber-400">{interpretations[1].action}</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="h-px w-6 border-t border-dashed border-source-border dash-animated" />
+          <div className="rounded-md border border-white/30 bg-white/10 px-3 py-1.5 flex-1 text-center">
+            <p className="text-xs text-white/90">{interpretations[1].outcome}</p>
+          </div>
+        </div>
+
+        {/* Row 3 */}
+        <div className="flex items-center gap-2">
+          <div className="h-px flex-1 border-t border-dashed border-source-border" />
+          <div className="rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-1.5">
+            <p className="text-xs text-amber-400">{interpretations[2].action}</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="h-px w-6 border-t border-dashed border-source-border dash-animated" />
+          <div className="rounded-md border border-[#C74B2A]/40 bg-[#C74B2A]/10 px-3 py-1.5 flex-1 text-center">
+            <p className="text-xs text-[#C74B2A]">{interpretations[2].outcome}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Caption */}
+      <p className="mt-6 text-[11px] text-white/70 text-center">
+        semantic distance from original intent grows with every AI inference cycle
+      </p>
+    </div>
   );
 }
 
 // =============================================================================
-// Diagram 3 — AI Slop
+// Diagram 3 — Lost in AI Slop (Voices → AI Layer → Flat Output)
 // =============================================================================
 
 function AISlopDiagram() {
-  const items = [
-    { x: 30, y: 20, w: 120, h: 55, label: "AI-generated\nemail draft", color: "rgba(79,110,247,0.15)", border: "rgba(79,110,247,0.5)" },
-    { x: 170, y: 30, w: 120, h: 55, label: "Auto-summarized\nmeeting notes", color: "rgba(78,203,160,0.15)", border: "rgba(78,203,160,0.5)" },
-    { x: 310, y: 15, w: 120, h: 55, label: "Agent-written\ncode PR", color: "rgba(245,158,11,0.15)", border: "rgba(245,158,11,0.5)" },
-    { x: 450, y: 35, w: 120, h: 55, label: "Generated\nspec analysis", color: "rgba(124,58,237,0.15)", border: "rgba(124,58,237,0.5)" },
-    { x: 90, y: 90, w: 120, h: 55, label: "Auto-created\nJira tickets", color: "rgba(199,75,42,0.15)", border: "rgba(199,75,42,0.5)" },
-    { x: 240, y: 100, w: 120, h: 55, label: "AI status\nupdates", color: "rgba(79,110,247,0.15)", border: "rgba(79,110,247,0.5)" },
-    { x: 380, y: 95, w: 120, h: 55, label: "Suggested\nfollow-ups", color: "rgba(78,203,160,0.15)", border: "rgba(78,203,160,0.5)" },
-    { x: 520, y: 85, w: 110, h: 55, label: "Compliance\nreport draft", color: "rgba(245,158,11,0.15)", border: "rgba(245,158,11,0.5)" },
+  const voices = [
+    { label: "Your breakthrough idea", color: "border-amber-500/60 bg-amber-500/15 text-amber-400" },
+    { label: "Colleague's challenge", color: "border-amber-500/60 bg-amber-500/15 text-amber-400" },
+    { label: "Client's real need", color: "border-teal-500/60 bg-teal-500/15 text-teal-400" },
+    { label: "Domain expertise", color: "border-teal-500/60 bg-teal-500/15 text-teal-400" },
+    { label: "Hard-won context", color: "border-teal-500/60 bg-teal-500/15 text-teal-400" },
   ];
 
   return (
-    <svg
-      width="100%"
-      viewBox="0 0 660 220"
-      className="overflow-visible"
-      aria-label="AI slop volume diagram"
-    >
-      {/* Scattered items */}
-      {items.map((item, i) => (
-        <g key={i}>
-          <rect x={item.x} y={item.y} width={item.w} height={item.h} rx="6" fill={item.color} stroke={item.border} strokeWidth="0.8" />
-          {item.label.split("\n").map((line, j) => (
-            <text key={j} x={item.x + item.w / 2} y={item.y + 22 + j * 14} textAnchor="middle" fontSize="10" fill="rgba(255,255,255,0.55)">
-              {line}
-            </text>
+    <div>
+      {/* Column headers */}
+      <div className="grid grid-cols-[1fr_auto_1fr] gap-6 mb-4">
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-white/70">
+          Distinct voices entering
+        </p>
+        <div />
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-white/70">
+          What people receive
+        </p>
+      </div>
+
+      <div className="grid grid-cols-[1fr_auto_1fr] gap-6 items-center">
+        {/* Left — voices */}
+        <div className="space-y-2">
+          {voices.map((v) => (
+            <div
+              key={v.label}
+              className={`rounded-md border px-3 py-2 ${v.color}`}
+            >
+              <p className="text-xs font-medium">{v.label}</p>
+            </div>
           ))}
-        </g>
-      ))}
+        </div>
 
-      {/* You — overwhelmed in the center */}
-      <rect x="260" y="155" width="140" height="40" rx="8" fill="rgba(199,75,42,0.15)" stroke="rgba(199,75,42,0.7)" strokeWidth="1.5" />
-      <text x="330" y="172" textAnchor="middle" fontSize="12" fontWeight="600" fill="rgb(199,75,42)">
-        You — buried in output
-      </text>
-      <text x="330" y="210" textAnchor="middle" fontSize="10" fill="rgba(255,255,255,0.3)">
-        volume ≠ value — most of this is noise you now have to triage
-      </text>
+        {/* Center — AI content layer */}
+        <div className="flex flex-col items-center gap-2">
+          {/* Arrows in */}
+          <div className="flex gap-1">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="h-px w-6 border-t border-dashed border-source-border dash-animated" />
+            ))}
+          </div>
+          <div className="rounded-lg border border-white/30 bg-white/10 px-6 py-6 text-center">
+            <p className="text-sm font-semibold text-white">AI content</p>
+            <p className="text-[11px] text-white/80">layer</p>
+          </div>
+          {/* Arrows out */}
+          <div className="flex gap-1">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="h-px w-6 border-t border-dashed border-source-border dash-animated" />
+            ))}
+          </div>
+        </div>
 
-      {/* Animated dashed lines from items to you */}
-      {items.map((item, i) => (
-        <line
-          key={i}
-          x1={item.x + item.w / 2}
-          y1={item.y + item.h}
-          x2="330"
-          y2="155"
-          className="dash-animated"
-          stroke="rgba(199,75,42,0.15)"
-          strokeWidth="0.8"
-        />
-      ))}
-    </svg>
+        {/* Right — flat output */}
+        <div className="rounded-lg border border-white/30 bg-white/10 p-4 space-y-2">
+          <p className="text-[11px] text-white/70 mb-3">
+            AI slop — confident, fluent, flat
+          </p>
+          {/* Gray placeholder lines */}
+          <div className="h-2 w-4/5 rounded bg-source-border" />
+          <div className="h-2 w-3/5 rounded bg-source-border" />
+          <div className="h-2 w-full rounded bg-source-border" />
+          {/* The buried insight */}
+          <div className="rounded border border-teal-500/40 bg-teal-500/10 px-3 py-1.5 my-1">
+            <p className="text-[11px] font-medium text-teal-400">
+              real insight + innovation
+            </p>
+          </div>
+          <div className="h-2 w-4/5 rounded bg-source-border" />
+          <div className="h-2 w-2/3 rounded bg-source-border" />
+        </div>
+      </div>
+
+      {/* Caption */}
+      <p className="mt-6 text-[11px] text-white/70 text-center">
+        original voices and insight → absorbed, flattened, indistinguishable from filler
+      </p>
+    </div>
   );
 }
 
@@ -286,7 +315,7 @@ function AISlopDiagram() {
 export default function ProblemsPage() {
   return (
     <div className="min-h-screen bg-[#F7F7F7]">
-      <div className="mx-auto max-w-4xl p-8 space-y-16">
+      <div className="mx-auto max-w-4xl p-8 space-y-20">
         {/* Hero */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -317,8 +346,8 @@ export default function ProblemsPage() {
         <ProblemSection
           number="02"
           title="Semantic Drift"
-          description='Your intent is clear in your head. But by the time it passes through an AI assistant, gets interpreted by an agent, and turns into executed actions — the meaning has shifted. Each handoff introduces a small distortion. Small drifts compound into wrong outcomes.'
-          insight='This is why deterministic walls matter. Financial calculations run as real Python code in a Daytona sandbox, not LLM inference. Business rules are hard-coded, not "understood." The agent writes the code — the sandbox runs it exactly.'
+          description='Your intent is clear. But when 3 people and their AI tools each interpret "ship faster," the goal splinters into 3 divergent actions. Small drifts compound into wrong outcomes.'
+          insight='This is why deterministic walls matter. Financial calculations run as real Python code in a sandbox, not LLM inference. Business rules are hard-coded, not "understood." The agent writes the code — the sandbox runs it exactly.'
           linkTo="/strategy"
           linkLabel="See Finance Agent: Daytona Sandbox"
         >
@@ -328,8 +357,8 @@ export default function ProblemsPage() {
         <ProblemSection
           number="03"
           title="Lost in AI Slop"
-          description="AI doesn't just help you work — it generates work. Auto-drafted emails, summarized meetings, agent-written PRs, generated reports, suggested follow-ups. The output volume grows faster than your ability to review it."
-          insight="This is why Stripe caps agent CI at 2 rounds and enforces mandatory human review on every PR. Volume without quality gates is noise. Source's Blueprint pattern — deterministic walls between agentic steps — ensures that what reaches a human is worth reviewing."
+          description="Distinct voices — your breakthrough idea, a colleague's challenge, a client's real need — enter an AI content layer and come out the other side as confident, fluent, flat text. The real insight is buried in filler."
+          insight="This is why Stripe caps agent CI at 2 rounds and enforces mandatory human review on every PR. Volume without quality gates is noise. Source's Blueprint pattern ensures what reaches a human is worth reviewing."
           linkTo="/ai-coding"
           linkLabel="See AI Coding: The Blueprint Pattern"
         >
