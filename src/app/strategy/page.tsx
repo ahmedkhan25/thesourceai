@@ -161,7 +161,357 @@ function IntelligenceVsJudgment() {
 }
 
 // =============================================================================
-// Section 2 — Agent Orchestration (React Flow)
+// Section 2 — What is an Agent?
+// =============================================================================
+
+function WhatIsAnAgent() {
+  return (
+    <section>
+      <SectionHeader
+        title="What is an Agent?"
+        subtitle={
+          <>
+            Building blocks from simple workflows to autonomous agents —{" "}
+            <a
+              href="https://www.anthropic.com/engineering/building-effective-agents"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-source-ai hover:underline"
+            >
+              via Anthropic
+            </a>
+          </>
+        }
+      />
+
+      {/* Key distinction */}
+      <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="rounded-xl border border-source-border bg-white p-5"
+          style={{ borderLeftWidth: 4, borderLeftColor: "#4F6EF7" }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <Zap size={16} className="text-source-ai" />
+            <h4 className="text-sm font-semibold text-source-black">Workflows</h4>
+          </div>
+          <p className="text-sm text-source-muted">
+            LLMs and tools orchestrated through <strong>predefined code paths</strong>.
+            Predictable, reliable, and easier to reason about.
+          </p>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="rounded-xl border border-source-border bg-white p-5"
+          style={{ borderLeftWidth: 4, borderLeftColor: "#C74B2A" }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <Brain size={16} className="text-[#C74B2A]" />
+            <h4 className="text-sm font-semibold text-source-black">Agents</h4>
+          </div>
+          <p className="text-sm text-source-muted">
+            LLMs <strong>dynamically direct their own processes</strong> and tool usage,
+            maintaining control over how they accomplish tasks.
+          </p>
+        </motion.div>
+      </div>
+
+      {/* Animated Agent Loop Diagram */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="mb-8 rounded-xl border border-source-border bg-white p-6"
+      >
+        <h4 className="mb-4 text-center text-sm font-semibold text-source-muted uppercase tracking-wider">
+          The Agent Loop
+        </h4>
+        <div className="relative flex flex-col items-center gap-0">
+          {/* Row 1: Prompt → LLM */}
+          <div className="flex items-center gap-4">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="rounded-lg border border-source-border bg-source-gray px-4 py-2.5"
+            >
+              <span className="text-xs font-semibold text-source-black">Your Prompt</span>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scaleX: 0 }}
+              whileInView={{ opacity: 1, scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 0.5 }}
+              className="text-source-green"
+            >
+              <ArrowRight size={20} />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.6 }}
+              className="rounded-xl border-2 border-source-green bg-source-green/5 px-6 py-3"
+            >
+              <div className="flex items-center gap-2">
+                <Brain size={18} className="text-source-green" />
+                <span className="text-sm font-bold text-source-green">LLM Evaluates</span>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Arrow down from LLM */}
+          <motion.div
+            initial={{ opacity: 0, scaleY: 0 }}
+            whileInView={{ opacity: 1, scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3, delay: 0.9 }}
+            className="my-1 text-source-green"
+          >
+            <ChevronDown size={20} />
+          </motion.div>
+
+          {/* Row 2: Tool Calls Loop */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 1.0 }}
+            className="relative rounded-xl border-2 border-dashed border-source-ai/30 bg-source-ai/5 px-8 py-4"
+          >
+            <span className="absolute -top-2.5 left-4 bg-white px-2 text-[10px] font-semibold uppercase tracking-wider text-source-ai">
+              Agentic Loop
+            </span>
+            <div className="flex items-center gap-4">
+              <div className="rounded-lg border border-source-border bg-white px-4 py-2.5 shadow-sm">
+                <div className="flex items-center gap-1.5">
+                  <Search size={14} className="text-source-ai" />
+                  <span className="text-xs font-semibold text-source-black">Tool Call(s)</span>
+                </div>
+              </div>
+              <div className="flex flex-col items-center gap-0.5">
+                <span className="text-[9px] text-source-muted">tool results</span>
+                <motion.div
+                  animate={{ x: [0, -8, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                >
+                  <ArrowRight size={16} className="rotate-180 text-source-ai" />
+                </motion.div>
+              </div>
+              <div className="rounded-lg border border-source-border bg-white px-4 py-2.5 shadow-sm">
+                <div className="flex items-center gap-1.5">
+                  <Brain size={14} className="text-source-green" />
+                  <span className="text-xs font-semibold text-source-black">Evaluate</span>
+                </div>
+              </div>
+              <div className="flex flex-col items-center gap-0.5">
+                <span className="text-[9px] text-source-muted">tool calls</span>
+                <motion.div
+                  animate={{ x: [0, 8, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                >
+                  <ArrowRight size={16} className="text-source-ai" />
+                </motion.div>
+              </div>
+            </div>
+            {/* Animated pulse ring */}
+            <motion.div
+              animate={{ opacity: [0.3, 0.6, 0.3] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              className="absolute -inset-1 rounded-xl border-2 border-source-ai/20 pointer-events-none"
+            />
+          </motion.div>
+
+          {/* Arrow down: no tool calls */}
+          <div className="flex items-center gap-2 my-1">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1.3 }}
+              className="text-source-muted"
+            >
+              <ChevronDown size={20} />
+            </motion.div>
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1.4 }}
+              className="text-[10px] text-source-muted"
+            >
+              no tool calls
+            </motion.span>
+          </div>
+
+          {/* Row 3: Final Answer */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 1.5 }}
+            className="rounded-lg border-2 border-source-green bg-source-green/10 px-5 py-2.5"
+          >
+            <span className="text-sm font-bold text-source-green">Final Answer</span>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Pattern cards — animated stagger */}
+      <h4 className="mb-4 text-sm font-semibold text-source-muted uppercase tracking-wider">
+        Common Patterns
+      </h4>
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3"
+      >
+        {[
+          {
+            title: "Prompt Chaining",
+            description: "Sequential LLM calls, each processing the previous output",
+            icon: ArrowRight,
+            color: "#4F6EF7",
+            tag: "Workflow",
+            diagram: "LLM → LLM → LLM → Output",
+          },
+          {
+            title: "Routing",
+            description: "Classify input and direct to specialized handlers",
+            icon: ArrowRight,
+            color: "#4F6EF7",
+            tag: "Workflow",
+            diagram: "Input → Router → Handler A | B | C",
+          },
+          {
+            title: "Parallelization",
+            description: "Run independent subtasks simultaneously, then aggregate",
+            icon: Zap,
+            color: "#4F6EF7",
+            tag: "Workflow",
+            diagram: "Task → LLM ∥ LLM ∥ LLM → Merge",
+          },
+          {
+            title: "Orchestrator-Workers",
+            description: "Central LLM delegates dynamically to specialist workers",
+            icon: Bot,
+            color: "#2D8B5E",
+            tag: "Source's Approach",
+            diagram: "Orchestrator → Worker A | B | C → Synthesize",
+          },
+          {
+            title: "Evaluator-Optimizer",
+            description: "One LLM generates, another provides iterative feedback",
+            icon: TrendingUp,
+            color: "#C74B2A",
+            tag: "Advanced",
+            diagram: "Generate → Evaluate → Refine ↻",
+          },
+          {
+            title: "Autonomous Agent",
+            description: "LLM uses tools in a loop, guided by environment feedback",
+            icon: Brain,
+            color: "#C74B2A",
+            tag: "Agent",
+            diagram: "Prompt → LLM → Tool → Observe ↻",
+          },
+        ].map((pattern) => {
+          const Icon = pattern.icon;
+          return (
+            <motion.div
+              key={pattern.title}
+              variants={staggerItem}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className="rounded-xl border border-source-border bg-white p-5 cursor-default"
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <span
+                  className="rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
+                  style={{
+                    backgroundColor: `${pattern.color}15`,
+                    color: pattern.color,
+                  }}
+                >
+                  {pattern.tag}
+                </span>
+                <div
+                  className="flex h-7 w-7 items-center justify-center rounded-lg"
+                  style={{ backgroundColor: `${pattern.color}10`, color: pattern.color }}
+                >
+                  <Icon size={14} />
+                </div>
+              </div>
+
+              {/* Animated diagram */}
+              <div
+                className="mb-3 overflow-hidden rounded-lg px-3 py-2"
+                style={{ backgroundColor: `${pattern.color}08` }}
+              >
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="text-[11px] font-mono tracking-wide"
+                  style={{ color: pattern.color }}
+                >
+                  {pattern.diagram}
+                </motion.p>
+              </div>
+
+              <h4 className="text-sm font-semibold text-source-black">{pattern.title}</h4>
+              <p className="mt-1 text-xs leading-relaxed text-source-muted">
+                {pattern.description}
+              </p>
+            </motion.div>
+          );
+        })}
+      </motion.div>
+
+      {/* Source's approach callout */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+        className="mt-6 rounded-xl border border-source-green/30 bg-source-green/5 p-5"
+      >
+        <div className="flex items-start gap-3">
+          <motion.div
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-source-green/10 text-source-green"
+          >
+            <Bot size={16} />
+          </motion.div>
+          <div>
+            <h4 className="text-sm font-semibold text-source-black">
+              Source&apos;s Approach: Orchestrator-Workers
+            </h4>
+            <p className="mt-1 text-sm text-source-muted">
+              A central Procurement Orchestrator delegates to specialist agents (spec extraction,
+              vendor matching, bid comparison) with human-in-the-loop gates for high-value decisions.
+              Start with workflows, graduate to autonomous agents as confidence grows.
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+// =============================================================================
+// Section 3 — Agent Orchestration (React Flow)
 // =============================================================================
 
 interface AgentNodeData {
@@ -405,12 +755,141 @@ function AgentOrchestration() {
           );
         })}
       </div>
+
+      {/* Orchestration Types */}
+      <div className="mt-8">
+        <h4 className="mb-4 text-sm font-semibold text-source-muted uppercase tracking-wider">
+          Types of Agent Orchestration
+        </h4>
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 gap-3 md:grid-cols-2"
+        >
+          {[
+            {
+              title: "Centralized",
+              description: "A single orchestrator controls all agents, assigning tasks and managing data flow. Predictable and easy to debug.",
+              color: "#2D8B5E",
+              diagram: (
+                <svg width="120" height="80" viewBox="0 0 120 80">
+                  <circle cx="60" cy="15" r="10" fill="#2D8B5E" opacity={0.2} stroke="#2D8B5E" strokeWidth={1.5} />
+                  <text x="60" y="18" textAnchor="middle" fill="#2D8B5E" fontSize="7" fontWeight="bold">O</text>
+                  {[20, 50, 80, 100].map((x, i) => (
+                    <g key={i}>
+                      <line x1="60" y1="25" x2={x} y2="55" stroke="#2D8B5E" strokeWidth={1} opacity={0.5} />
+                      <circle cx={x} cy="65" r="8" fill="#4F6EF7" opacity={0.15} stroke="#4F6EF7" strokeWidth={1} />
+                      <text x={x} y="68" textAnchor="middle" fill="#4F6EF7" fontSize="6">A{i + 1}</text>
+                    </g>
+                  ))}
+                </svg>
+              ),
+              isSource: true,
+            },
+            {
+              title: "Decentralized",
+              description: "No master agent — each agent acts independently, communicating peer-to-peer. More flexible and resilient to failures.",
+              color: "#4F6EF7",
+              diagram: (
+                <svg width="120" height="80" viewBox="0 0 120 80">
+                  {[
+                    { x: 30, y: 20 }, { x: 90, y: 20 }, { x: 20, y: 60 }, { x: 60, y: 65 }, { x: 100, y: 60 },
+                  ].map((pos, i, arr) => (
+                    <g key={i}>
+                      {arr.slice(i + 1).map((other, j) => (
+                        <line key={j} x1={pos.x} y1={pos.y} x2={other.x} y2={other.y} stroke="#4F6EF7" strokeWidth={0.8} opacity={0.3} />
+                      ))}
+                      <circle cx={pos.x} cy={pos.y} r="8" fill="#4F6EF7" opacity={0.15} stroke="#4F6EF7" strokeWidth={1} />
+                      <text x={pos.x} y={pos.y + 3} textAnchor="middle" fill="#4F6EF7" fontSize="6">A{i + 1}</text>
+                    </g>
+                  ))}
+                </svg>
+              ),
+            },
+            {
+              title: "Hierarchical",
+              description: "Agents arranged in layers — higher-level agents guide lower-level ones. Balances control with flexibility.",
+              color: "#C74B2A",
+              diagram: (
+                <svg width="120" height="80" viewBox="0 0 120 80">
+                  <circle cx="60" cy="12" r="8" fill="#C74B2A" opacity={0.2} stroke="#C74B2A" strokeWidth={1.5} />
+                  <text x="60" y="15" textAnchor="middle" fill="#C74B2A" fontSize="6" fontWeight="bold">L1</text>
+                  {[35, 85].map((x, i) => (
+                    <g key={i}>
+                      <line x1="60" y1="20" x2={x} y2="35" stroke="#C74B2A" strokeWidth={1} opacity={0.4} />
+                      <circle cx={x} cy="40" r="8" fill="#C74B2A" opacity={0.15} stroke="#C74B2A" strokeWidth={1} />
+                      <text x={x} y="43" textAnchor="middle" fill="#C74B2A" fontSize="6">L2</text>
+                    </g>
+                  ))}
+                  {[15, 55, 65, 105].map((x, i) => (
+                    <g key={i}>
+                      <line x1={i < 2 ? 35 : 85} y1="48" x2={x} y2="60" stroke="#C74B2A" strokeWidth={0.8} opacity={0.3} />
+                      <circle cx={x} cy="67" r="7" fill="#C74B2A" opacity={0.1} stroke="#C74B2A" strokeWidth={1} />
+                      <text x={x} y="70" textAnchor="middle" fill="#C74B2A" fontSize="5">L3</text>
+                    </g>
+                  ))}
+                </svg>
+              ),
+            },
+            {
+              title: "Federated",
+              description: "Independent systems collaborate via shared protocols. Each retains autonomy while agents coordinate across boundaries.",
+              color: "#7C3AED",
+              diagram: (
+                <svg width="120" height="80" viewBox="0 0 120 80">
+                  {[
+                    { cx: 30, cy: 35, label: "Sys A" },
+                    { cx: 90, cy: 35, label: "Sys B" },
+                    { cx: 60, cy: 65, label: "Sys C" },
+                  ].map((sys, i) => (
+                    <g key={i}>
+                      <rect x={sys.cx - 18} y={sys.cy - 12} width={36} height={24} rx={4} fill={`${"#7C3AED"}10`} stroke="#7C3AED" strokeWidth={1} strokeDasharray="3 2" />
+                      <text x={sys.cx} y={sys.cy + 3} textAnchor="middle" fill="#7C3AED" fontSize="6">{sys.label}</text>
+                    </g>
+                  ))}
+                  <line x1="48" y1="35" x2="72" y2="35" stroke="#7C3AED" strokeWidth={1} opacity={0.4} strokeDasharray="2 2" />
+                  <line x1="30" y1="47" x2="50" y2="55" stroke="#7C3AED" strokeWidth={1} opacity={0.4} strokeDasharray="2 2" />
+                  <line x1="90" y1="47" x2="70" y2="55" stroke="#7C3AED" strokeWidth={1} opacity={0.4} strokeDasharray="2 2" />
+                </svg>
+              ),
+            },
+          ].map((type) => (
+            <motion.div
+              key={type.title}
+              variants={staggerItem}
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              className={`rounded-xl border bg-white p-5 ${
+                "isSource" in type && type.isSource
+                  ? "border-source-green/40 ring-1 ring-source-green/20"
+                  : "border-source-border"
+              }`}
+            >
+              <div className="flex items-start gap-4">
+                <div className="shrink-0">{type.diagram}</div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h4 className="text-sm font-semibold text-source-black">{type.title}</h4>
+                    {"isSource" in type && type.isSource && (
+                      <span className="rounded-full bg-source-green/10 px-2 py-0.5 text-[10px] font-semibold text-source-green">
+                        Source&apos;s Model
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs leading-relaxed text-source-muted">{type.description}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
     </section>
   );
 }
 
 // =============================================================================
-// Section 3 — Data Flywheel
+// Section 4 — Data Flywheel
 // =============================================================================
 
 function DataFlywheel() {
@@ -670,6 +1149,7 @@ export default function StrategyPage() {
         </motion.div>
 
         <IntelligenceVsJudgment />
+        <WhatIsAnAgent />
         <AgentOrchestration />
         <DataFlywheel />
         <PhasedRoadmap />

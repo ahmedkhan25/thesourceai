@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -88,11 +89,18 @@ export default function HomePage() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-12"
         >
+          <Image
+            src="/source-logo.png"
+            alt="The Source Logo"
+            width={200}
+            height={50}
+            className="mb-6 h-12 w-auto"
+          />
           <h1 className="text-4xl font-bold text-source-black">
             The Source AI Explorer
           </h1>
           <p className="mt-3 text-xl text-source-muted">
-            An AI-Native Vision for Construction Procurement
+            An AI-Native Vision for FF&E Procurement
           </p>
         </motion.div>
 

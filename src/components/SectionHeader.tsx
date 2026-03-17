@@ -1,6 +1,6 @@
 interface SectionHeaderProps {
   title: string;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
   badge?: string;
 }
 

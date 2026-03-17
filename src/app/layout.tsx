@@ -4,6 +4,7 @@ import { CopilotKit } from "@copilotkit/react-core";
 import "@copilotkit/react-ui/styles.css";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
+import PasswordGate from "@/components/PasswordGate";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,12 +34,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <CopilotKit runtimeUrl="/api/copilotkit">
-          <div className="flex min-h-screen bg-[#F7F7F7]">
-            <Sidebar />
-            <main className="flex-1 overflow-auto">{children}</main>
-          </div>
-        </CopilotKit>
+        <PasswordGate>
+          <CopilotKit runtimeUrl="/api/copilotkit">
+            <div className="flex min-h-screen bg-[#F7F7F7]">
+              <Sidebar />
+              <main className="flex-1 overflow-auto">{children}</main>
+            </div>
+          </CopilotKit>
+        </PasswordGate>
       </body>
     </html>
   );

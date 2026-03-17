@@ -852,7 +852,7 @@ export const roadmapPhases: RoadmapPhase[] = [
   {
     phase: 4,
     title: "Predictive Intelligence",
-    timeline: "Year 2+",
+    timeline: "Month 12+",
     description:
       "Proactive AI that anticipates needs, optimizes decisions, and learns from Source's $6.5B procurement history",
     items: [
