@@ -85,6 +85,16 @@ body {
   background: #9ca3af;
 }
 
+/* Animated dashed lines for diagrams */
+@keyframes dash-flow {
+  to { stroke-dashoffset: -18; }
+}
+.dash-animated {
+  stroke-dasharray: 5 4;
+  animation: dash-flow 1.9s linear infinite;
+  fill: none;
+}
+
 /* React Flow overrides */
 .react-flow__attribution {
   display: none !important;

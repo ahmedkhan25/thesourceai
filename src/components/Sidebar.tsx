@@ -7,6 +7,7 @@ import clsx from "clsx";
 import {
   Home,
   Globe,
+  AlertTriangle,
   Target,
   Play,
   FileSearch,
@@ -19,6 +20,7 @@ import {
 const navItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/landscape", label: "AI Landscape", icon: Globe },
+  { href: "/problems", label: "AI Problems", icon: AlertTriangle },
   { href: "/strategy", label: "Agent Strategy", icon: Target },
   { href: "/demos", label: "Interactive Demos", icon: Play },
   { href: "/bid-review", label: "Bid Review", icon: FileSearch },
