@@ -67,23 +67,23 @@ const currentStateIndicators = ["Slow", "Error-prone", "No visibility"];
 
 const aiVisionBlocks = [
   {
-    label: "AG-UI Frontend",
-    description: "Real-time streaming agent interface",
+    label: "React/Next.js Frontend",
+    description: "Monorepo with component library, same-day deploys",
     color: "#4F6EF7",
   },
   {
-    label: "Procurement Orchestrator",
-    description: "Stateful workflow coordination",
+    label: "Claude Agent SDK + Vercel AI SDK",
+    description: "Agent orchestration with model garden flexibility",
     color: "#2D8B5E",
   },
   {
-    label: "Specialist Agents",
+    label: "Specialist Agents (Claude Opus 4.6+)",
     description: "Spec, vendor, bid, compliance agents",
     color: "#4ECBA0",
   },
   {
-    label: "RAG + Vector DB",
-    description: "Semantic search over procurement data",
+    label: "Aurora pgvector + Bedrock",
+    description: "RAG pipeline with co-located vectors & data",
     color: "#C74B2A",
   },
   {
@@ -342,8 +342,9 @@ export default function ArchitecturePage() {
         variants={sectionVariants}
       >
         <SectionHeader
-          title="Technology Stack"
-          subtitle="Every layer chosen for procurement-specific requirements"
+          title="Proposed Technology Stack"
+          subtitle="Subject to actual discovery and evaluation of Source's codebase"
+          badge="Proposed"
         />
 
         <motion.div

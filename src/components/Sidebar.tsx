@@ -11,16 +11,20 @@ import {
   Play,
   FileSearch,
   Layers,
+  FlaskConical,
+  Terminal,
   User,
 } from "lucide-react";
 
 const navItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/landscape", label: "AI Landscape", icon: Globe },
-  { href: "/strategy", label: "Strategy", icon: Target },
+  { href: "/strategy", label: "Agent Strategy", icon: Target },
   { href: "/demos", label: "Interactive Demos", icon: Play },
   { href: "/bid-review", label: "Bid Review", icon: FileSearch },
   { href: "/architecture", label: "Architecture", icon: Layers },
+  { href: "/evals", label: "Evals", icon: FlaskConical },
+  { href: "/ai-coding", label: "AI Coding", icon: Terminal },
   { href: "/about", label: "About", icon: User },
 ];
 

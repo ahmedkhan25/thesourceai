@@ -871,69 +871,69 @@ export const roadmapPhases: RoadmapPhase[] = [
 export const architectureLayers: ArchitectureLayer[] = [
   {
     id: "frontend",
-    label: "Frontend",
-    sub: "Next.js 14 + CopilotKit + AG-UI",
+    label: "Frontend Platform",
+    sub: "React/Next.js monorepo + component library",
     color: "#4F6EF7",
     detail:
-      "App Router with streaming UI. CopilotKit provides chat, actions, and generative UI. AG-UI protocol streams agent state changes to React components in real-time.",
-    alternatives: "Remix, SvelteKit",
+      "App Router with streaming UI, shared component library, automated testing, and multi-environment CI/CD. Incrementally replacing legacy internal tool with zero disruption — reducing release cycles from 2-3 weeks to same-day.",
+    alternatives: "Remix, Angular, legacy internal tooling",
     tradeoff:
-      "Next.js has best CopilotKit support and Vercel deployment story",
+      "Next.js monorepo enables incremental migration from legacy, shared components across procurement screens, and same-day deploys via CI/CD",
   },
   {
     id: "orchestration",
     label: "Agent Orchestration",
-    sub: "LangGraph + Python microservice",
+    sub: "Claude Agent SDK + Vercel AI SDK",
     color: "#2D8B5E",
     detail:
-      "Stateful agent graphs with human-in-the-loop interrupt nodes. Saga pattern for financial safety — every PO generation is a compensatable transaction.",
-    alternatives: "CrewAI, raw OpenAI function calling",
+      "Claude Agent SDK for autonomous multi-step procurement workflows with tool use. Vercel AI SDK for model-agnostic streaming and structured output. Saga pattern for financial safety — every PO generation is a compensatable transaction.",
+    alternatives: "LangGraph, CrewAI, raw API calls",
     tradeoff:
-      "LangGraph's checkpointing enables reliable multi-step procurement workflows",
+      "Claude Agent SDK provides native tool use and agentic loops; Vercel AI SDK adds model garden flexibility and streaming primitives",
   },
   {
     id: "rag",
     label: "RAG Pipeline",
-    sub: "pgvector + chunking + reranking",
+    sub: "Amazon Aurora pgvector + Bedrock Embeddings",
     color: "#4ECBA0",
     detail:
-      "Procurement specs, vendor catalogs, and historical PO data embedded and stored in pgvector. Hybrid search (semantic + keyword) with cross-encoder reranking.",
-    alternatives: "Pinecone, Weaviate, Chroma",
+      "Procurement specs, vendor catalogs, and historical PO data embedded via Amazon Bedrock and stored in Aurora PostgreSQL with pgvector. Hybrid search (semantic + keyword) with cross-encoder reranking.",
+    alternatives: "OpenSearch, Pinecone, standalone vector DBs",
     tradeoff:
-      "pgvector co-locates vectors with relational data — one database for procurement data + embeddings",
+      "Aurora pgvector co-locates vectors with relational procurement data — one database, no sync issues, full SQL joins between embeddings and business tables",
   },
   {
     id: "models",
-    label: "AI Models",
-    sub: "GPT-4o + Claude 3.5 + specialized",
+    label: "AI Model Garden",
+    sub: "Claude Opus 4.6+ primary · Bedrock model access",
     color: "#C74B2A",
     detail:
-      "GPT-4o for structured extraction and tool use. Claude for long-context spec analysis. Fine-tuned models for domain-specific tasks (CSI classification, price estimation).",
-    alternatives: "Gemini, open-source (Llama)",
+      "Claude Opus 4.6 (or higher) as the primary model for complex reasoning, spec analysis, and agent orchestration. Amazon Bedrock provides access to a model garden for specialized tasks — smaller models for classification, embeddings, and cost-sensitive operations. Vercel AI SDK enables hot-swapping between models without code changes.",
+    alternatives: "GPT-4o, Gemini, open-source (Llama)",
     tradeoff:
-      "Multi-model approach matches model strengths to task requirements",
+      "Claude Opus for depth and reliability on high-stakes procurement decisions; Bedrock model garden for cost optimization on routine tasks",
   },
   {
     id: "infra",
     label: "Infrastructure",
-    sub: "Vercel + Render + Neon",
+    sub: "AWS — ECS, Aurora, S3, CloudFront",
     color: "#6B7280",
     detail:
-      "Vercel for frontend (edge, streaming SSR). Render for Python agent service (persistent process for LangGraph). Neon Postgres for procurement data + pgvector.",
-    alternatives: "AWS (ECS/RDS), GCP (Cloud Run)",
+      "ECS Fargate for containerized services (frontend SSR, agent runtime). Aurora PostgreSQL for procurement data + pgvector. S3 + CloudFront for static assets and document storage. EC2 warm pool for AI coding agent devboxes. Multi-environment CI/CD with GitHub Actions.",
+    alternatives: "GCP, Azure, managed platforms (Vercel/Render)",
     tradeoff:
-      "Managed platforms minimize ops burden for small team, easy to migrate to cloud later",
+      "AWS provides the depth needed for $6.5B procurement platform — VPC isolation, IAM, compliance certifications, and Bedrock model access in the same cloud",
   },
   {
     id: "observability",
     label: "Observability",
-    sub: "LangSmith + Sentry + custom metrics",
+    sub: "Langfuse + CloudWatch + Sentry",
     color: "#1A1A1A",
     detail:
-      "LangSmith traces every agent step, tool call, and LLM invocation. Sentry for error tracking. Custom dashboards for procurement metrics (PO accuracy, vendor response times, cost savings).",
-    alternatives: "Datadog, Helicone, Langfuse",
+      "Langfuse (open-source, self-hosted) traces every agent step, tool call, and LLM invocation with cost tracking. CloudWatch for infrastructure metrics and alerting. Sentry for application error tracking. Custom dashboards for procurement KPIs (PO accuracy, vendor response times, cost savings).",
+    alternatives: "Datadog, LangSmith, Helicone",
     tradeoff:
-      "LangSmith has deepest LangGraph integration; Sentry is battle-tested for Next.js",
+      "Langfuse is MIT-licensed and self-hostable on AWS — full data control for procurement-sensitive information; CloudWatch is native to AWS infrastructure",
   },
 ];
 

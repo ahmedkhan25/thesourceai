@@ -20,6 +20,7 @@ import {
   MessageSquare,
   Scale,
   ShieldCheck,
+  Calculator,
   ChevronDown,
   ChevronUp,
   Zap,
@@ -529,6 +530,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   MessageSquare,
   Scale,
   ShieldCheck,
+  Calculator,
 };
 
 function AgentNode({ data }: NodeProps<AgentNodeData>) {
@@ -592,6 +594,12 @@ const agentDetails = [
     tools: ["Code checker (ADA/fire)", "Cert validator", "Warranty parser"],
     data: ["Building codes DB", "Certification registries", "Project requirements"],
   },
+  {
+    name: "Finance Agent",
+    icon: Calculator,
+    tools: ["Daytona Python sandbox", "Line item calculator", "Tax engine", "Budget validator"],
+    data: ["PO history", "Tax rate tables", "Budget allocations", "Vendor payment terms"],
+  },
 ];
 
 function AgentOrchestration() {
@@ -644,8 +652,15 @@ function AgentOrchestration() {
       {
         id: "compliance",
         type: "agentNode",
-        position: { x: 780, y: 160 },
+        position: { x: 700, y: 160 },
         data: { label: "Compliance", subtitle: "Codes & certifications", icon: "ShieldCheck" },
+        draggable: false,
+      },
+      {
+        id: "finance",
+        type: "agentNode",
+        position: { x: 880, y: 200 },
+        data: { label: "Finance Agent", subtitle: "Deterministic calculations", icon: "Calculator" },
         draggable: false,
       },
     ],
@@ -659,6 +674,7 @@ function AgentOrchestration() {
       { id: "e-o-comms", source: "orchestrator", target: "comms", animated: true, style: { stroke: "#2D8B5E" } },
       { id: "e-o-quote", source: "orchestrator", target: "quote", animated: true, style: { stroke: "#2D8B5E" } },
       { id: "e-o-compliance", source: "orchestrator", target: "compliance", animated: true, style: { stroke: "#2D8B5E" } },
+      { id: "e-o-finance", source: "orchestrator", target: "finance", animated: true, style: { stroke: "#C74B2A" } },
     ],
     []
   );
@@ -884,6 +900,112 @@ function AgentOrchestration() {
           ))}
         </motion.div>
       </div>
+
+      {/* Finance Agent — Daytona Sandbox */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="mt-8 rounded-xl border border-[#C74B2A]/30 bg-white p-6"
+      >
+        <div className="flex items-center gap-3 mb-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#C74B2A]/10 text-[#C74B2A]">
+            <Calculator size={20} />
+          </div>
+          <div>
+            <h4 className="text-base font-semibold text-source-black">
+              Finance Agent: Deterministic Calculations via Daytona Sandbox
+            </h4>
+            <p className="text-xs text-source-muted">
+              The LLM identifies values and operations — Python code does the math in an isolated sandbox
+            </p>
+          </div>
+        </div>
+
+        <p className="mb-4 text-sm leading-relaxed text-source-muted">
+          Financial calculations in procurement demand <strong>zero tolerance for error</strong>.
+          A 99% accuracy rate on a $2.4M PO means $24,000 in potential mistakes. The Finance Agent
+          uses a{" "}
+          <a
+            href="https://www.daytona.io/dotfiles/run-ai-generated-code-safely-with-daytona-sandboxes-part-1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-source-ai hover:underline"
+          >
+            Daytona Python sandbox
+          </a>{" "}
+          to execute all arithmetic deterministically — the LLM writes the calculation logic,
+          but actual math runs as real Python code in an isolated environment.
+        </p>
+
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {/* How it works */}
+          <div>
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-source-muted">
+              How it works
+            </p>
+            <div className="space-y-2">
+              {[
+                { step: "1", label: "LLM extracts values", detail: "Qty: 24, Unit price: $4,850, Tax rate: 8.31%" },
+                { step: "2", label: "LLM generates Python code", detail: "Writes calculation logic as executable code" },
+                { step: "3", label: "Daytona sandbox executes", detail: "Runs Python in isolated container — deterministic result" },
+                { step: "4", label: "Result verified", detail: "Output compared against business rules before use" },
+              ].map((s) => (
+                <div key={s.step} className="flex items-start gap-2.5">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#C74B2A]/10 text-[10px] font-bold text-[#C74B2A]">
+                    {s.step}
+                  </span>
+                  <div>
+                    <p className="text-xs font-semibold text-source-black">{s.label}</p>
+                    <p className="text-[11px] text-source-muted">{s.detail}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Code example */}
+          <div>
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-source-muted">
+              Example: PO Line Item Calculation
+            </p>
+            <div className="rounded-lg bg-[#1A1A1A] p-4">
+              <pre className="whitespace-pre-wrap font-mono text-[11px] leading-relaxed text-white/90">
+{`from daytona_sdk import Daytona
+
+daytona = Daytona()
+workspace = daytona.create()
+
+# LLM generates this code, sandbox executes it
+calc_code = """
+qty = 24
+unit_price = 4850.00
+subtotal = qty * unit_price     # $116,400.00
+tax = subtotal * 0.0831         # $9,672.84
+shipping = 2400.00
+total = subtotal + tax + shipping
+print(f"{total:.2f}")           # $128,472.84
+"""
+
+result = workspace.process.code_run(calc_code)
+# result.result → "128472.84"
+# Deterministic. Every. Single. Time.`}
+              </pre>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4 rounded-lg bg-[#C74B2A]/5 border border-[#C74B2A]/15 p-3">
+          <p className="text-xs text-source-muted">
+            <strong className="text-source-black">Why a sandbox?</strong>{" "}
+            The LLM-generated Python runs in a Daytona container with no network access,
+            no filesystem access, and automatic cleanup. If the code is malformed,
+            the sandbox catches it safely. Spin-up takes &lt;90ms. The agent never does
+            math itself — it only writes the code that does the math.
+          </p>
+        </div>
+      </motion.div>
     </section>
   );
 }
@@ -1142,9 +1264,9 @@ export default function StrategyPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-3xl font-bold text-source-black">Strategy</h1>
+          <h1 className="text-3xl font-bold text-source-black">Agent Strategy</h1>
           <p className="mt-2 text-source-muted">
-            How Source should approach AI — what to automate, what to keep human, and how to build compounding advantages
+            How Source should approach AI agents — what to automate, what to keep human, and how to build compounding advantages
           </p>
         </motion.div>
 
